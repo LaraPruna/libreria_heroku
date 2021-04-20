@@ -7,8 +7,8 @@
 <body>
 	<h1>Biblioteca de Lara Pruna Ternero</h1>
 	<ul>
-		{% for elem in isbn -%}
-			<li><a href='/libro/{{elem}}'>{{titulos[isbn.index(elem)]}}</a></li>
+		{% for libro in libros -%}
+			<li><a href='/libro/{{libro.isbn}}'>{{libro.title}}</a></li>
 		{% endfor -%}
 	</ul>
 </body>

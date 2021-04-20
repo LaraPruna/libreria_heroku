@@ -7,9 +7,10 @@
 <body>
 	<h1>{{categoria}}</h1>
 	<ul>
-		{% for elem in categorias -%}
+		{% for elem in isbn -%}
 			<li><a href='/libro/{{elem}}'>{{titulos[isbn.index(elem)]}}</a></li>
 		{% endfor -%}
 	</ul>
+	<a href='/'>Índice</a>
 </body>
 </html>

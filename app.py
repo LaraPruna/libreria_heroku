@@ -7,12 +7,7 @@ with open("books.json") as fichero:
 
 @app.route('/')
 def indice():
-	isbn=[]
-	titulos=[]
-	for libro in libros:
-		isbn.append(libro.get("isbn"))
-		titulos.append(libro.get("title"))
-	return render_template("indice.html",isbn=isbn,titulos=titulos)
+	return render_template("indice.html",libros=libros)
 
 @app.route('/libro/<isbn>')
 def detalle_libro(isbn):
@@ -22,7 +17,10 @@ def detalle_libro(isbn):
 				titulo=libro.get("title")
 				portada=libro.get("thumbnailUrl")
 				numpag=libro.get("pageCount")
-				descripcion=libro.get("longDescription")
+				if libro.get("longDescription")==None:
+					descripcion="Este libro tiene una descripción disponible."
+				else:
+					descripcion=libro.get("longDescription")
 				autores=libro.get("authors")
 				cat=libro.get("categories")
 				status=libro.get("status")
@@ -32,11 +30,15 @@ def detalle_libro(isbn):
 
 @app.route('/categoria/<categoria>')
 def categorias(categoria):
-	categorias=[]
+	titulos=[]
+	isbn=[]
 	for libro in libros:
-		if libro.get("categories") not in categorias:
-			categorias.append(libro.get("categories"))
-	return render_template("categoria.html",categorias=categorias)
+		for cat in libro.get("categories"):
+			if cat == categoria:
+				categoria=cat
+				titulos.append(libro.get("title"))
+				isbn.append(libro.get("isbn"))
+	return render_template("categoria.html",titulos=titulos,isbn=isbn,categoria=categoria)
 
 port=os.environ["PORT"]
 app.run('0.0.0.0',int(port),debug=True)
