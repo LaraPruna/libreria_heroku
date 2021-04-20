@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Biblioteca</title>
+</head>
+<body>
+	<h1>{{titulo}}</h1>
+	<img src="{{portada}}" alt="Portada">
+	<ul>
+		{% if status == "MEAP" -%}
+		<b><p style='color: red'>ESTE LIBRO NO SE HA PUBLICADO</p></b>
+		{% endif -%}
+		<li>Número de páginas: {{numpag}}</li>
+		<li>Descripción: {{descripcion}}</li>
+		<li>Autores:</li>
+		{% for autor in autores -%}
+			<ul>
+				<li>{{autor}}</li>
+			</ul>
+			{% endfor -%}
+		<li>Categorías:</li>
+		{% for categoria in cat -%}
+			<ul>
+				<li><a href='/categoria/{{categoria}}'>{{categoria}}</a></li>
+			</ul>
+			{% endfor -%}
+	</ul>
+
+	<a href='/'>Índice</a>
+</body>
+</html>
