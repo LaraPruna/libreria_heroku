@@ -2,7 +2,7 @@ from flask import Flask, render_template, abort
 import os, json
 
 app = Flask(__name__)
-with open("books.json") as fichero:
+with open("./books.json") as fichero:
 		libros=json.load(fichero)
 
 @app.route('/')
