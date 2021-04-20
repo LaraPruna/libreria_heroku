@@ -5,11 +5,11 @@ app = Flask(__name__)
 with open("./books.json") as fichero:
 		libros=json.load(fichero)
 
-@app.route('/')
+@app.route('/',methods=["GET","POST"])
 def indice():
 	return render_template("indice.html",libros=libros)
 
-@app.route('/libro/<isbn>')
+@app.route('/libro/<isbn>',methods=["GET","POST"])
 def detalle_libro(isbn):
 	for libro in libros:
 		if isbn==libro.get("isbn"):
@@ -28,7 +28,7 @@ def detalle_libro(isbn):
 				abort(404)
 	return render_template("detalle_libro.html",titulo=titulo,portada=portada,numpag=numpag,descripcion=descripcion,autores=autores,cat=cat,status=status)
 
-@app.route('/categoria/<categoria>')
+@app.route('/categoria/<categoria>',methods=["GET","POST"])
 def categorias(categoria):
 	titulos=[]
 	isbn=[]
